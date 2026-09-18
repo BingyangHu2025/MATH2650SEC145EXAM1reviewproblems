@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MATH 2650 — Exam 1 Interactive Review</title>
+<script>
+window.MathJax={tex:{inlineMath:[['\\(','\\)'],['$','$']]},svg:{fontCache:'global'}};
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+<style>
+:root{--bg:#f6f7fb;--card:#fff;--ink:#18202a;--muted:#667085;--line:#dde3ea;--accent:#294f7d;--accent2:#e9f0f8;--good:#1f7a4d;--warn:#8a5a00;--shadow:0 8px 28px rgba(23,35,51,.08);--radius:18px}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.56}
+header{background:#13293d;color:white;padding:30px 20px 26px}
+.wrap{max-width:1040px;margin:0 auto}
+h1{margin:0 0 7px;font-size:clamp(1.9rem,4vw,2.8rem)} h2{margin:0}
+.subtitle{opacity:.87;max-width:820px}
+.pills{display:flex;gap:9px;flex-wrap:wrap;margin-top:16px}
+.pill{border:1px solid rgba(255,255,255,.22);border-radius:999px;padding:6px 11px;background:rgba(255,255,255,.06);font-size:.88rem}
+main{padding:24px 16px 60px}
+.intro,.problem-card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px;margin:20px 0}
+.intro{margin-top:0}
+.navgrid{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin-top:15px}
+.navgrid a{text-align:center;text-decoration:none;color:var(--accent);background:#f7faff;border:1px solid #d9e4ef;padding:8px;border-radius:10px;font-weight:700}
+.problem-head{display:flex;justify-content:space-between;gap:14px;align-items:flex-start;border-bottom:1px solid var(--line);padding-bottom:14px;margin-bottom:16px}
+.tag{font-size:.82rem;border-radius:999px;padding:5px 10px;background:var(--accent2);color:var(--accent);border:1px solid #d5e1ef;white-space:nowrap}
+.mathbox{border-left:4px solid var(--accent);padding:14px 16px;background:#fbfcfe;border-radius:10px;margin:12px 0 18px;font-size:1.06rem}
+label{display:block;font-weight:700;margin:14px 0 8px}
+textarea{width:100%;min-height:145px;resize:vertical;border:1px solid #cfd7e2;border-radius:12px;padding:13px;font:inherit;background:#fff;outline:none}
+textarea:focus{border-color:#7291b3;box-shadow:0 0 0 3px rgba(41,79,125,.08)}
+.btnrow{display:flex;gap:9px;flex-wrap:wrap;margin-top:12px}
+button,.linkbtn{border:1px solid #c9d3df;background:#fff;color:var(--ink);padding:9px 13px;border-radius:10px;font-weight:700;cursor:pointer;text-decoration:none;font-size:.93rem}
+button:hover,.linkbtn:hover{background:#f6f9fc}
+.primary{background:var(--accent);color:#fff;border-color:var(--accent)} .primary:hover{background:#203f66}
+.danger{color:#8a2d2d}
+.hint{display:none;margin-top:12px;border:1px solid #ead9ae;background:#fffaf0;border-radius:12px;padding:13px 15px}
+.hint b{color:var(--warn)}
+.ai-box{margin-top:18px;padding:16px;border-radius:14px;background:#f7fbff;border:1px solid #d7e6f4}
+.ai-box h3{margin:0 0 4px;font-size:1.05rem} .ai-box p{margin:4px 0;color:var(--muted)}
+.prompt-preview{display:none;white-space:pre-wrap;background:#fff;border:1px solid var(--line);border-radius:10px;padding:12px;margin-top:12px;max-height:270px;overflow:auto;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.84rem}
+.status{font-size:.9rem;color:var(--good);margin-top:8px;min-height:1.3em}
+details{margin-top:14px;border:1px solid var(--line);border-radius:12px;padding:12px 14px;background:#fbfcfe}
+summary{cursor:pointer;font-weight:800}
+.solution{margin-top:12px;padding-top:10px;border-top:1px solid var(--line)}
+.progressline,.small{color:var(--muted);font-size:.9rem}
+.progressline{margin-top:14px}
+footer{text-align:center;color:var(--muted);padding:28px 16px 54px;font-size:.9rem}
+@media(max-width:720px){.problem-head{flex-direction:column}.problem-card,.intro{padding:17px}.navgrid{grid-template-columns:repeat(3,1fr)}}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <h1>MATH 2650 — Exam 1 Interactive Review</h1>
+    <div class="subtitle">Session 145 · Work first, reveal the instructor's steps gradually, and use AI only to diagnose your current work.</div>
+    <div class="pills">
+      <span class="pill">12 problems</span>
+      <span class="pill">answer-key steps as hints</span>
+      <span class="pill">optional AI diagnosis</span>
+      <span class="pill">full solutions hidden by default</span>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+<section class="intro">
+  <h2>How to use this review</h2>
+  <ol>
+    <li>Try the problem on your own first.</li>
+    <li>If you are stuck, reveal <strong>one hint at a time</strong>. Each hint follows the same step structure used in the answer key.</li>
+    <li>After reading a hint, return to your own work before opening the next one.</li>
+    <li>You may use <strong>Optional AI diagnosis</strong> to check your current attempt. The generated prompt tells ChatGPT not to give the full solution and to follow the instructor's method.</li>
+    <li>Open the full solution only after you have made a serious attempt.</li>
+  </ol>
+  <p class="small">Your typed work and hint progress are saved only in this browser via local storage. This page does not upload your work.</p>
+  <div class="navgrid"><a href="#p1">Problem 1</a><a href="#p2">Problem 2</a><a href="#p3">Problem 3</a><a href="#p4">Problem 4</a><a href="#p5">Problem 5</a><a href="#p6">Problem 6</a><a href="#p7">Problem 7</a><a href="#p8">Problem 8</a><a href="#p9">Problem 9</a><a href="#p10">Problem 10</a><a href="#p11">Problem 11</a><a href="#p12">Problem 12</a></div>
+</section>
+
+
+<section class="problem-card" id="p1">
+  <div class="problem-head">
+    <div><h2>Problem 1</h2><div class="small">Exam 1 Review Session</div></div>
+    <span class="tag">Linear first-order IVP</span>
+  </div>
+  <div class="mathbox">Solve the initial value problem
+\[
+(x^2+1)y'+4x^3y=8xe^{-2x^2},\qquad y(0)=1.
+\]</div>
+  <label for="work1">Your current work</label>
+  <textarea id="work1" placeholder="Write what you have tried so far."></textarea>
+
+  <div class="btnrow">
+    <button type="button" onclick="showHint(1,1)">Hint 1</button><button type="button" onclick="showHint(1,2)">Hint 2</button><button type="button" onclick="showHint(1,3)">Hint 3</button><button type="button" onclick="showHint(1,4)">Hint 4</button>
+    <button type="button" class="danger" onclick="resetProblem(1)">Reset</button>
+  </div>
+
+  <div class="hint" id="p1h1"><b>Step 0 — Standard form.</b> Divide by \(x^2+1\):
+\[
+y'+\frac{4x^3}{x^2+1}y=\frac{8xe^{-2x^2}}{x^2+1}.
+\]</div><div class="hint" id="p1h2"><b>Step 1 — Find \(P,Q\) and the integrating factor.</b>
+\[
+P(x)=\frac{4x^3}{x^2+1},\qquad Q(x)=\frac{8xe^{-2x^2}}{x^2+1}.
+\]
+Also,
+\[
+\int P(x)\,dx=2x^2-2\ln(x^2+1),
+\]
+so
+\[
+\rho(x)=\frac{e^{2x^2}}{(x^2+1)^2}.
+\]</div><div class="hint" id="p1h3"><b>Step 2 — Apply the linear-equation formula.</b>
+\[
+y(x)=\frac1{\rho(x)}\left[\int \rho(x)Q(x)\,dx+C\right].
+\]
+This reduces to
+\[
+y=(x^2+1)^2e^{-2x^2}\left[\int\frac{8x}{(x^2+1)^3}\,dx+C\right].
+\]</div><div class="hint" id="p1h4"><b>Step 3 — Use the initial condition.</b> After integration,
+\[
+y=e^{-2x^2}\left[-2+C(x^2+1)^2\right].
+\]
+Now substitute \(y(0)=1\).</div>
+
+  <div class="ai-box">
+    <h3>Optional AI diagnosis</h3>
+    <p>After making a real attempt, generate a prompt that asks ChatGPT to identify only the first mathematical issue and give one small next-step hint.</p>
+    <div class="btnrow">
+      <button type="button" class="primary" onclick="buildPrompt(1)">Build diagnosis prompt</button>
+      <button type="button" onclick="copyPrompt(1)">Copy prompt</button>
+      <a class="linkbtn" href="https://chatgpt.com/" target="_blank" rel="noopener">Open ChatGPT ↗</a>
+    </div>
+    <div class="prompt-preview" id="prompt1"></div>
+    <div class="status" id="status1"></div>
+  </div>
+
+  <details>
+    <summary>Show full solution</summary>
+    <div class="solution">\[
+\boxed{y=e^{-2x^2}\left(3(x^2+1)^2-2\right)}.
+\]</div>
+  </details>
+  <div class="progressline" id="progress1"></div>
+</section>
+
+<section class="problem-card" id="p2">
+  <div class="problem-head">
+    <div><h2>Problem 2</h2><div class="small">Exam 1 Review Session</div></div>
+    <span class="tag">Substitution → separable</span>
+  </div>
+  <div class="mathbox">Solve
+\[
+y'=(3x+y-1)^2.
+\]</div>
+  <label for="work2">Your current work</label>
+  <textarea id="work2" placeholder="Write what you have tried so far."></textarea>
+
+  <div class="btnrow">
+    <button type="button" onclick="showHint(2,1)">Hint 1</button><button type="button" onclick="showHint(2,2)">Hint 2</button><button type="button" onclick="showHint(2,3)">Hint 3</button><button type="button" onclick="showHint(2,4)">Hint 4</button>
+    <button type="button" class="danger" onclick="resetProblem(2)">Reset</button>
+  </div>
+
+  <div class="hint" id="p2h1"><b>Step 1 — Standard form.</b> The equation is already solved for \(y'\). Notice the repeated expression \(3x+y-1\).</div><div class="hint" id="p2h2"><b>Step 2 — Substitute.</b> Let
+\[
+v=3x+y-1.
+\]</div><div class="hint" id="p2h3"><b>Step 3 — Replace \(y,y'\).</b> Since \(y=v-3x+1\),
+\[
+y'=v'-3.
+\]
+Hence
+\[
+v'-3=v^2,\qquad \frac{dv}{v^2+3}=dx.
+\]</div><div class="hint" id="p2h4"><b>Step 4 — Solve \(v\), then recover \(y\).</b>
+Integrate
+\[
+\int\frac{dv}{v^2+3}=\int dx
+\]
+and substitute back \(v=3x+y-1\).</div>
+
+  <div class="ai-box">
+    <h3>Optional AI diagnosis</h3>
+    <p>After making a real attempt, generate a prompt that asks ChatGPT to identify only the first mathematical issue and give one small next-step hint.</p>
+    <div class="btnrow">
+      <button type="button" class="primary" onclick="buildPrompt(2)">Build diagnosis prompt</button>
+      <button type="button" onclick="copyPrompt(2)">Copy prompt</button>
+      <a class="linkbtn" href="https://chatgpt.com/" target="_blank" rel="noopener">Open ChatGPT ↗</a>
+    </div>
+    <div class="prompt-preview" id="prompt2"></div>
+    <div class="status" id="status2"></div>
+  </div>
+
+  <details>
+    <summary>Show full solution</summary>
+    <div class="solution">\[
+\boxed{y=1-3x+\sqrt3\,\tan(\sqrt3 x+C)}.
+\]</div>
+  </details>
+  <div class="progressline" id="progress2"></div>
+</section>
+
+<section class="problem-card" id="p3">
+  <div class="problem-head">
+    <div><h2>Problem 3</h2><div class="small">Exam 1 Review Session</div></div>
+    <span class="tag">Exact equation</span>
+  </div>
+  <div class="mathbox">Solve, where the equation is defined,
+\[
+y'=-\frac{2xy+y^2+y}{x^2+2xy+x}.
+\]</div>
+  <label for="work3">Your current work</label>
+  <textarea id="work3" placeholder="Write what you have tried so far."></textarea>
+
+  <div class="btnrow">
+    <button type="button" onclick="showHint(3,1)">Hint 1</button><button type="button" onclick="showHint(3,2)">Hint 2</button><button type="button" onclick="showHint(3,3)">Hint 3</button><button type="button" onclick="showHint(3,4)">Hint 4</button><button type="button" onclick="showHint(3,5)">Hint 5</button>
+    <button type="button" class="danger" onclick="resetProblem(3)">Reset</button>
+  </div>
+
+  <div class="hint" id="p3h1"><b>Step 1 — Differential form.</b>
+\[
+(2xy+y^2+y)\,dx+(x^2+2xy+x)\,dy=0.
+\]
+Thus
+\[
+M=2xy+y^2+y,\qquad N=x^2+2xy+x.
+\]</div><div class="hint" id="p3h2"><b>Step 2 — Test exactness.</b>
+\[
+M_y=2x+2y+1,\qquad N_x=2x+2y+1.
+\]
+Therefore \(M_y=N_x\).</div><div class="hint" id="p3h3"><b>Step 3 — Build the potential.</b>
+\[
+F=\int M\,dx+g(y)=x^2y+xy^2+xy+g(y).
+\]</div><div class="hint" id="p3h4"><b>Step 4 — Determine \(g\).</b> Use \(F_y=N\):
+\[
+x^2+2xy+x+g'(y)=x^2+2xy+x,
+\]
+so \(g'(y)=0\).</div><div class="hint" id="p3h5"><b>Step 5 — Conclude.</b> Absorb the constant \(g(y)\) into the arbitrary constant and write \(F(x,y)=C\).</div>
+
+  <div class="ai-box">
+    <h3>Optional AI diagnosis</h3>
+    <p>After making a real attempt, generate a prompt that asks ChatGPT to identify only the first mathematical issue and give one small next-step hint.</p>
+    <div class="btnrow">
+      <button type="button" class="primary" onclick="buildPrompt(3)">Build diagnosis prompt</button>
+      <button type="button" onclick="copyPrompt(3)">Copy prompt</button>
+      <a class="linkbtn" href="https://chatgpt.com/" target="_blank" rel="noopener">Open ChatGPT ↗</a>
+    </div>
+    <div class="prompt-preview" id="prompt3"></div>
+    <div class="status" id="status3"></div>
+  </div>
+
+  <details>
+    <summary>Show full solution</summary>
+    <div class="solution">\[
+\boxed{x^2y+xy^2+xy=C}.
+\]</div>
+  </details>
+  <div class="progressline" id="progress3"></div>
+</section>
+
+<section class="problem-card" id="p4">
+  <div class="problem-head">
+    <div><h2>Problem 4</h2><div class="small">Exam 1 Review Session</div></div>
+    <span class="tag">Homogeneous equation</span>
+  </div>
+  <div class="mathbox">Solve, for \(x\ne0\),
+\[
+xy\,y'=2x^2+3y^2.
+\]</div>
+  <label for="work4">Your current work</label>
+  <textarea id="work4" placeholder="Write what you have tried so far."></textarea>
+
+  <div class="btnrow">
+    <button type="button" onclick="showHint(4,1)">Hint 1</button><button type="button" onclick="showHint(4,2)">Hint 2</button><button type="button" onclick="showHint(4,3)">Hint 3</button><button type="button" onclick="showHint(4,4)">Hint 4</button>
+    <button type="button" class="danger" onclick="resetProblem(4)">Reset</button>
+  </div>
+
+  <div class="hint" id="p4h1"><b>Step 1 — Standard form.</b>
+\[
+y'=\frac{2+3(y/x)^2}{y/x}.
+\]
+This depends only on \(y/x\).</div><div class="hint" id="p4h2"><b>Step 2 — Substitute.</b>
+\[
+v=\frac yx.
+\]</div><div class="hint" id="p4h3"><b>Step 3 — Replace \(y,y'\).</b> Since \(y=xv\),
+\[
+y'=v+xv'.
+\]
+Thus
+\[
+xv'=\frac{2(1+v^2)}v,\qquad
+\frac{v}{1+v^2}\,dv=2\frac{dx}{x}.
+\]</div><div class="hint" id="p4h4"><b>Step 4 — Integrate and recover \(y\).</b>
+\[
+\frac12\ln(1+v^2)=2\ln|x|+C.
+\]
+Exponentiate and substitute \(v=y/x\).</div>
+
+  <div class="ai-box">
+    <h3>Optional AI diagnosis</h3>
+    <p>After making a real attempt, generate a prompt that asks ChatGPT to identify only the first mathematical issue and give one small next-step hint.</p>
+    <div class="btnrow">
+      <button type="button" class="primary" onclick="buildPrompt(4)">Build diagnosis prompt</button>
+      <button type="button" onclick="copyPrompt(4)">Copy prompt</button>
+      <a class="linkbtn" href="https://chatgpt.com/" target="_blank" rel="noopener">Open ChatGPT ↗</a>
+    </div>
+    <div class="prompt-preview" id="prompt4"></div>
+    <div class="status" id="status4"></div>
+  </div>
+
+  <details>
+    <summary>Show full solution</summary>
+    <div class="solution">\[
+\boxed{x^2+y^2=Cx^6,\qquad C>0}.
+\]</div>
+  </details>
+  <div class="progressline" id="progress4"></div>
+</section>
+
+<section class="problem-card" id="p5">
+  <div class="problem-head">
+    <div><h2>Problem 5</h2><div class="small">Exam 1 Review Session</div></div>
+    <span class="tag">Bernoulli equation</span>
+  </div>
+  <div class="mathbox">Solve, for \(x\ne0\),
+\[
+xy'+2y=x^2y^3.
+\]</div>
+  <label for="work5">Your current work</label>
+  <textarea id="work5" placeholder="Write what you have tried so far."></textarea>
+
+  <div class="btnrow">
+    <button type="button" onclick="showHint(5,1)">Hint 1</button><button type="button" onclick="showHint(5,2)">Hint 2</button><button type="button" onclick="showHint(5,3)">Hint 3</button><button type="button" onclick="showHint(5,4)">Hint 4</button>
+    <button type="button" class="danger" onclick="resetProblem(5)">Reset</button>
+  </div>
+
+  <div class="hint" id="p5h1"><b>Step 1 — Bernoulli standard form.</b>
+\[
+y'+\frac2x y=xy^3.
+\]
+Thus \(P=2/x,\ Q=x,\ n=3\).</div><div class="hint" id="p5h2"><b>Step 2 — Substitute.</b>
+\[
+v=y^{1-n}=y^{-2}.
+\]</div><div class="hint" id="p5h3"><b>Step 3 — Solve the linear equation for \(v\).</b>
+\[
+v'-\frac4xv=-2x.
+\]
+Its integrating factor is
+\[
+\rho=x^{-4}.
+\]
+Solving gives
+\[
+v=x^2+Cx^4.
+\]</div><div class="hint" id="p5h4"><b>Step 4 — Recover \(y\).</b> Since \(v=y^{-2}\),
+\[
+y^{-2}=x^2+Cx^4.
+\]
+Also check \(y\equiv0\) directly in the original equation.</div>
+
+  <div class="ai-box">
+    <h3>Optional AI diagnosis</h3>
+    <p>After making a real attempt, generate a prompt that asks ChatGPT to identify only the first mathematical issue and give one small next-step hint.</p>
+    <div class="btnrow">
+      <button type="button" class="primary" onclick="buildPrompt(5)">Build diagnosis prompt</button>
+      <button type="button" onclick="copyPrompt(5)">Copy prompt</button>
+      <a class="linkbtn" href="https://chatgpt.com/" target="_blank" rel="noopener">Open ChatGPT ↗</a>
+    </div>
+    <div class="prompt-preview" id="prompt5"></div>
+    <div class="status" id="status5"></div>
+  </div>
+
+  <details>
+    <summary>Show full solution</summary>
+    <div class="solution">\[
+\boxed{y=\pm\frac1{\sqrt{x^2+Cx^4}}}
+\]
+for the nonzero solutions, and
+\[
+\boxed{y\equiv0}
+\]
+is also a solution.</div>
+  </details>
+  <div class="progressline" id="progress5"></div>
+</section>
+
+<section class="problem-card" id="p6">
+  <div class="problem-head">
+    <div><h2>Problem 6</h2><div class="small">Exam 1 Review Session</div></div>
+    <span class="tag">Bernoulli equation</span>
+  </div>
+  <div class="mathbox">Solve
+\[
+y^3y'+xy^4=4x.
+\]</div>
+  <label for="work6">Your current work</label>
+  <textarea id="work6" placeholder="Write what you have tried so far."></textarea>
+
+  <div class="btnrow">
+    <button type="button" onclick="showHint(6,1)">Hint 1</button><button type="button" onclick="showHint(6,2)">Hint 2</button><button type="button" onclick="showHint(6,3)">Hint 3</button><button type="button" onclick="showHint(6,4)">Hint 4</button>
+    <button type="button" class="danger" onclick="resetProblem(6)">Reset</button>
+  </div>
+
+  <div class="hint" id="p6h1"><b>Step 1 — Bernoulli standard form.</b> For nonzero \(y\),
+\[
+y'+xy=4xy^{-3}.
+\]
+Thus \(P=x,\ Q=4x,\ n=-3\).</div><div class="hint" id="p6h2"><b>Step 2 — Substitute.</b>
+\[
+v=y^{1-n}=y^4.
+\]</div><div class="hint" id="p6h3"><b>Step 3 — Solve the linear equation for \(v\).</b>
+\[
+v'+4xv=16x.
+\]
+The integrating factor is
+\[
+\rho=e^{2x^2}.
+\]
+Hence
+\[
+v=4+Ce^{-2x^2}.
+\]</div><div class="hint" id="p6h4"><b>Step 4 — Recover \(y\).</b> Since \(v=y^4\), take real fourth roots and state the interval condition.</div>
+
+  <div class="ai-box">
+    <h3>Optional AI diagnosis</h3>
+    <p>After making a real attempt, generate a prompt that asks ChatGPT to identify only the first mathematical issue and give one small next-step hint.</p>
+    <div class="btnrow">
+      <button type="button" class="primary" onclick="buildPrompt(6)">Build diagnosis prompt</button>
+      <button type="button" onclick="copyPrompt(6)">Copy prompt</button>
+      <a class="linkbtn" href="https://chatgpt.com/" target="_blank" rel="noopener">Open ChatGPT ↗</a>
+    </div>
+    <div class="prompt-preview" id="prompt6"></div>
+    <div class="status" id="status6"></div>
+  </div>
+
+  <details>
+    <summary>Show full solution</summary>
+    <div class="solution">\[
+\boxed{y=\pm\left(4+Ce^{-2x^2}\right)^{1/4}}
+\]
+on intervals where \(4+Ce^{-2x^2}>0\).</div>
+  </details>
+  <div class="progressline" id="progress6"></div>
+</section>
+
+<section class="problem-card" id="p7">
+  <div class="problem-head">
+    <div><h2>Problem 7</h2><div class="small">Exam 1 Review Session</div></div>
+    <span class="tag">Exact equation</span>
+  </div>
+  <div class="mathbox">Solve
+\[
+(3x^2+2y^2)\,dx+(4xy+6y^2)\,dy=0.
+\]</div>
+  <label for="work7">Your current work</label>
+  <textarea id="work7" placeholder="Write what you have tried so far."></textarea>
+
+  <div class="btnrow">
+    <button type="button" onclick="showHint(7,1)">Hint 1</button><button type="button" onclick="showHint(7,2)">Hint 2</button><button type="button" onclick="showHint(7,3)">Hint 3</button><button type="button" onclick="showHint(7,4)">Hint 4</button><button type="button" onclick="showHint(7,5)">Hint 5</button>
+    <button type="button" class="danger" onclick="resetProblem(7)">Reset</button>
+  </div>
+
+  <div class="hint" id="p7h1"><b>Step 1 — Identify \(M,N\).</b>
+\[
+M=3x^2+2y^2,\qquad N=4xy+6y^2.
+\]</div><div class="hint" id="p7h2"><b>Step 2 — Test exactness.</b>
+\[
+M_y=4y,\qquad N_x=4y.
+\]</div><div class="hint" id="p7h3"><b>Step 3 — Build the potential.</b>
+\[
+F=\int M\,dx+g(y)=x^3+2xy^2+g(y).
+\]</div><div class="hint" id="p7h4"><b>Step 4 — Determine \(g\).</b>
+\[
+F_y=4xy+g'(y)=4xy+6y^2,
+\]
+so \(g'(y)=6y^2\) and \(g(y)=2y^3\).</div><div class="hint" id="p7h5"><b>Step 5 — Conclude.</b> Substitute \(g\) into \(F\) and set \(F=C\).</div>
+
+  <div class="ai-box">
+    <h3>Optional AI diagnosis</h3>
+    <p>After making a real attempt, generate a prompt that asks ChatGPT to identify only the first mathematical issue and give one small next-step hint.</p>
+    <div class="btnrow">
+      <button type="button" class="primary" onclick="buildPrompt(7)">Build diagnosis prompt</button>
+      <button type="button" onclick="copyPrompt(7)">Copy prompt</button>
+      <a class="linkbtn" href="https://chatgpt.com/" target="_blank" rel="noopener">Open ChatGPT ↗</a>
+    </div>
+    <div class="prompt-preview" id="prompt7"></div>
+    <div class="status" id="status7"></div>
+  </div>
+
+  <details>
+    <summary>Show full solution</summary>
+    <div class="solution">\[
+\boxed{x^3+2xy^2+2y^3=C}.
+\]</div>
+  </details>
+  <div class="progressline" id="progress7"></div>
+</section>
+
+<section class="problem-card" id="p8">
+  <div class="problem-head">
+    <div><h2>Problem 8</h2><div class="small">Exam 1 Review Session</div></div>
+    <span class="tag">Exact equation</span>
+  </div>
+  <div class="mathbox">Solve
+\[
+(e^x\sin y+\tan y)\,dx+(e^x\cos y+x\sec^2y+2y)\,dy=0.
+\]</div>
+  <label for="work8">Your current work</label>
+  <textarea id="work8" placeholder="Write what you have tried so far."></textarea>
+
+  <div class="btnrow">
+    <button type="button" onclick="showHint(8,1)">Hint 1</button><button type="button" onclick="showHint(8,2)">Hint 2</button><button type="button" onclick="showHint(8,3)">Hint 3</button><button type="button" onclick="showHint(8,4)">Hint 4</button><button type="button" onclick="showHint(8,5)">Hint 5</button>
+    <button type="button" class="danger" onclick="resetProblem(8)">Reset</button>
+  </div>
+
+  <div class="hint" id="p8h1"><b>Step 1 — Identify \(M,N\).</b>
+\[
+M=e^x\sin y+\tan y,\qquad
+N=e^x\cos y+x\sec^2y+2y.
+\]</div><div class="hint" id="p8h2"><b>Step 2 — Test exactness.</b>
+\[
+M_y=e^x\cos y+\sec^2y,\qquad
+N_x=e^x\cos y+\sec^2y.
+\]</div><div class="hint" id="p8h3"><b>Step 3 — Build the potential.</b>
+\[
+F=\int M\,dx+g(y)=e^x\sin y+x\tan y+g(y).
+\]</div><div class="hint" id="p8h4"><b>Step 4 — Determine \(g\).</b>
+\[
+F_y=e^x\cos y+x\sec^2y+g'(y)=N,
+\]
+so \(g'(y)=2y\) and \(g(y)=y^2\).</div><div class="hint" id="p8h5"><b>Step 5 — Conclude.</b> Substitute \(g(y)=y^2\) and set \(F=C\).</div>
+
+  <div class="ai-box">
+    <h3>Optional AI diagnosis</h3>
+    <p>After making a real attempt, generate a prompt that asks ChatGPT to identify only the first mathematical issue and give one small next-step hint.</p>
+    <div class="btnrow">
+      <button type="button" class="primary" onclick="buildPrompt(8)">Build diagnosis prompt</button>
+      <button type="button" onclick="copyPrompt(8)">Copy prompt</button>
+      <a class="linkbtn" href="https://chatgpt.com/" target="_blank" rel="noopener">Open ChatGPT ↗</a>
+    </div>
+    <div class="prompt-preview" id="prompt8"></div>
+    <div class="status" id="status8"></div>
+  </div>
+
+  <details>
+    <summary>Show full solution</summary>
+    <div class="solution">\[
+\boxed{e^x\sin y+x\tan y+y^2=C}.
+\]</div>
+  </details>
+  <div class="progressline" id="progress8"></div>
+</section>
+
+<section class="problem-card" id="p9">
+  <div class="problem-head">
+    <div><h2>Problem 9</h2><div class="small">Exam 1 Review Session</div></div>
+    <span class="tag">Homogeneous equation</span>
+  </div>
+  <div class="mathbox">Solve
+\[
+(x^2+xy+y^2)\,dx-x(x+2y)\,dy=0.
+\]</div>
+  <label for="work9">Your current work</label>
+  <textarea id="work9" placeholder="Write what you have tried so far."></textarea>
+
+  <div class="btnrow">
+    <button type="button" onclick="showHint(9,1)">Hint 1</button><button type="button" onclick="showHint(9,2)">Hint 2</button><button type="button" onclick="showHint(9,3)">Hint 3</button><button type="button" onclick="showHint(9,4)">Hint 4</button>
+    <button type="button" class="danger" onclick="resetProblem(9)">Reset</button>
+  </div>
+
+  <div class="hint" id="p9h1"><b>Step 1 — Standard form.</b>
+\[
+y'=\frac{1+y/x+(y/x)^2}{1+2y/x}.
+\]
+This depends only on \(y/x\).</div><div class="hint" id="p9h2"><b>Step 2 — Substitute.</b>
+\[
+v=\frac yx.
+\]</div><div class="hint" id="p9h3"><b>Step 3 — Replace and separate.</b> Since \(y=xv\),
+\[
+xv'=\frac{1-v^2}{1+2v}.
+\]
+Before dividing, note the constant solutions \(v=\pm1\), corresponding to \(y=\pm x\). For \(v\ne\pm1\),
+\[
+\frac{1+2v}{1-v^2}\,dv=\frac{dx}{x}.
+\]</div><div class="hint" id="p9h4"><b>Step 4 — Partial fractions and recovery.</b>
+\[
+\frac{1+2v}{1-v^2}
+=\frac{3/2}{1-v}-\frac{1/2}{1+v}.
+\]
+Integrate, substitute \(v=y/x\), and simplify.</div>
+
+  <div class="ai-box">
+    <h3>Optional AI diagnosis</h3>
+    <p>After making a real attempt, generate a prompt that asks ChatGPT to identify only the first mathematical issue and give one small next-step hint.</p>
+    <div class="btnrow">
+      <button type="button" class="primary" onclick="buildPrompt(9)">Build diagnosis prompt</button>
+      <button type="button" onclick="copyPrompt(9)">Copy prompt</button>
+      <a class="linkbtn" href="https://chatgpt.com/" target="_blank" rel="noopener">Open ChatGPT ↗</a>
+    </div>
+    <div class="prompt-preview" id="prompt9"></div>
+    <div class="status" id="status9"></div>
+  </div>
+
+  <details>
+    <summary>Show full solution</summary>
+    <div class="solution">\[
+\boxed{(x-y)^3(x+y)=Cx^2}.
+\]
+The constant solutions \(y=x\) and \(y=-x\) are included when \(C=0\).</div>
+  </details>
+  <div class="progressline" id="progress9"></div>
+</section>
+
+<section class="problem-card" id="p10">
+  <div class="problem-head">
+    <div><h2>Problem 10</h2><div class="small">Exam 1 Review Session</div></div>
+    <span class="tag">Second order: x missing</span>
+  </div>
+  <div class="mathbox">Solve
+\[
+y''=2y(y')^3.
+\]</div>
+  <label for="work10">Your current work</label>
+  <textarea id="work10" placeholder="Write what you have tried so far."></textarea>
+
+  <div class="btnrow">
+    <button type="button" onclick="showHint(10,1)">Hint 1</button><button type="button" onclick="showHint(10,2)">Hint 2</button><button type="button" onclick="showHint(10,3)">Hint 3</button><button type="button" onclick="showHint(10,4)">Hint 4</button>
+    <button type="button" class="danger" onclick="resetProblem(10)">Reset</button>
+  </div>
+
+  <div class="hint" id="p10h1"><b>Step 1 — Identify the missing variable.</b> The independent variable \(x\) does not appear explicitly.</div><div class="hint" id="p10h2"><b>Step 2 — Substitute.</b>
+\[
+p=y',\qquad y''=p\frac{dp}{dy}.
+\]</div><div class="hint" id="p10h3"><b>Step 3 — Solve \(p(y)\).</b>
+\[
+p\frac{dp}{dy}=2yp^3.
+\]
+For nonconstant solutions \(p\ne0\),
+\[
+\frac{dp}{p^2}=2y\,dy.
+\]
+Thus
+\[
+p=-\frac1{y^2+C_1}.
+\]</div><div class="hint" id="p10h4"><b>Step 4 — Recover \(y\).</b> Since \(p=dy/dx\),
+\[
+\frac{dx}{dy}=-(y^2+C_1).
+\]
+Integrate with respect to \(y\). Also check constant solutions separately.</div>
+
+  <div class="ai-box">
+    <h3>Optional AI diagnosis</h3>
+    <p>After making a real attempt, generate a prompt that asks ChatGPT to identify only the first mathematical issue and give one small next-step hint.</p>
+    <div class="btnrow">
+      <button type="button" class="primary" onclick="buildPrompt(10)">Build diagnosis prompt</button>
+      <button type="button" onclick="copyPrompt(10)">Copy prompt</button>
+      <a class="linkbtn" href="https://chatgpt.com/" target="_blank" rel="noopener">Open ChatGPT ↗</a>
+    </div>
+    <div class="prompt-preview" id="prompt10"></div>
+    <div class="status" id="status10"></div>
+  </div>
+
+  <details>
+    <summary>Show full solution</summary>
+    <div class="solution">\[
+\boxed{x+\frac{y^3}{3}+C_1y=C_2}
+\]
+for nonconstant solutions. Also every constant function
+\[
+\boxed{y\equiv C}
+\]
+is a solution.</div>
+  </details>
+  <div class="progressline" id="progress10"></div>
+</section>
+
+<section class="problem-card" id="p11">
+  <div class="problem-head">
+    <div><h2>Problem 11</h2><div class="small">Exam 1 Review Session</div></div>
+    <span class="tag">Second order: y missing</span>
+  </div>
+  <div class="mathbox">Solve
+\[
+y''=(x+y')^2.
+\]</div>
+  <label for="work11">Your current work</label>
+  <textarea id="work11" placeholder="Write what you have tried so far."></textarea>
+
+  <div class="btnrow">
+    <button type="button" onclick="showHint(11,1)">Hint 1</button><button type="button" onclick="showHint(11,2)">Hint 2</button><button type="button" onclick="showHint(11,3)">Hint 3</button><button type="button" onclick="showHint(11,4)">Hint 4</button>
+    <button type="button" class="danger" onclick="resetProblem(11)">Reset</button>
+  </div>
+
+  <div class="hint" id="p11h1"><b>Step 1 — Identify the missing variable.</b> The dependent variable \(y\) does not appear explicitly.</div><div class="hint" id="p11h2"><b>Step 2 — Substitute.</b>
+\[
+p=y',\qquad p'=y''.
+\]</div><div class="hint" id="p11h3"><b>Step 3 — Solve \(p(x)\).</b>
+\[
+p'=(x+p)^2.
+\]
+Let
+\[
+v=x+p.
+\]
+Then
+\[
+v'=1+p'=1+v^2,
+\qquad \frac{dv}{1+v^2}=dx.
+\]</div><div class="hint" id="p11h4"><b>Step 4 — Recover \(y\).</b>
+\[
+v=\tan(x+C_1),\qquad p=y'=\tan(x+C_1)-x.
+\]
+Integrate once more.</div>
+
+  <div class="ai-box">
+    <h3>Optional AI diagnosis</h3>
+    <p>After making a real attempt, generate a prompt that asks ChatGPT to identify only the first mathematical issue and give one small next-step hint.</p>
+    <div class="btnrow">
+      <button type="button" class="primary" onclick="buildPrompt(11)">Build diagnosis prompt</button>
+      <button type="button" onclick="copyPrompt(11)">Copy prompt</button>
+      <a class="linkbtn" href="https://chatgpt.com/" target="_blank" rel="noopener">Open ChatGPT ↗</a>
+    </div>
+    <div class="prompt-preview" id="prompt11"></div>
+    <div class="status" id="status11"></div>
+  </div>
+
+  <details>
+    <summary>Show full solution</summary>
+    <div class="solution">\[
+\boxed{y=-\ln|\cos(x+C_1)|-\frac{x^2}{2}+C_2}.
+\]</div>
+  </details>
+  <div class="progressline" id="progress11"></div>
+</section>
+
+<section class="problem-card" id="p12">
+  <div class="problem-head">
+    <div><h2>Problem 12</h2><div class="small">Exam 1 Review Session</div></div>
+    <span class="tag">Second order: x missing</span>
+  </div>
+  <div class="mathbox">Solve
+\[
+yy''+(y')^2=yy'.
+\]</div>
+  <label for="work12">Your current work</label>
+  <textarea id="work12" placeholder="Write what you have tried so far."></textarea>
+
+  <div class="btnrow">
+    <button type="button" onclick="showHint(12,1)">Hint 1</button><button type="button" onclick="showHint(12,2)">Hint 2</button><button type="button" onclick="showHint(12,3)">Hint 3</button><button type="button" onclick="showHint(12,4)">Hint 4</button>
+    <button type="button" class="danger" onclick="resetProblem(12)">Reset</button>
+  </div>
+
+  <div class="hint" id="p12h1"><b>Step 1 — Identify the missing variable.</b> The independent variable \(x\) is missing explicitly.</div><div class="hint" id="p12h2"><b>Step 2 — Substitute.</b>
+\[
+p=y',\qquad y''=p\frac{dp}{dy}.
+\]</div><div class="hint" id="p12h3"><b>Step 3 — Solve \(p(y)\).</b>
+\[
+yp\frac{dp}{dy}+p^2=yp.
+\]
+For \(p\ne0\),
+\[
+y\frac{dp}{dy}+p=y,
+\qquad
+\frac{dp}{dy}+\frac1y p=1.
+\]
+This is linear in \(p(y)\), with integrating factor \(\rho(y)=y\).</div><div class="hint" id="p12h4"><b>Step 4 — Recover \(y\).</b>
+\[
+\frac{d}{dy}(yp)=y,
+\qquad
+p=\frac y2+\frac{C_1}{y}.
+\]
+Since \(p=dy/dx\), separate variables and integrate.</div>
+
+  <div class="ai-box">
+    <h3>Optional AI diagnosis</h3>
+    <p>After making a real attempt, generate a prompt that asks ChatGPT to identify only the first mathematical issue and give one small next-step hint.</p>
+    <div class="btnrow">
+      <button type="button" class="primary" onclick="buildPrompt(12)">Build diagnosis prompt</button>
+      <button type="button" onclick="copyPrompt(12)">Copy prompt</button>
+      <a class="linkbtn" href="https://chatgpt.com/" target="_blank" rel="noopener">Open ChatGPT ↗</a>
+    </div>
+    <div class="prompt-preview" id="prompt12"></div>
+    <div class="status" id="status12"></div>
+  </div>
+
+  <details>
+    <summary>Show full solution</summary>
+    <div class="solution">\[
+\boxed{y^2=C_1+C_2e^x}.
+\]
+The constant solutions are included by taking \(C_2=0\).</div>
+  </details>
+  <div class="progressline" id="progress12"></div>
+</section>
+
+</main>
+
+<footer>MATH 2650 · Session 145 · Exam 1 Review Session</footer>
+
+<script>
+const problems={"1": {"statement": "Solve the initial value problem\n\\[\n(x^2+1)y'+4x^3y=8xe^{-2x^2},\\qquad y(0)=1.\n\\]", "guidance": "Use the instructor's linear-equation method: standard form, P and Q, integrating factor rho=e^(2x^2)/(x^2+1)^2, formula, then y(0)=1 giving C=3.", "hintCount": 4}, "2": {"statement": "Solve\n\\[\ny'=(3x+y-1)^2.\n\\]", "guidance": "Use v=3x+y-1, so y'=v'-3; separate dv/(v^2+3)=dx; integrate with arctan; recover y.", "hintCount": 4}, "3": {"statement": "Solve, where the equation is defined,\n\\[\ny'=-\\frac{2xy+y^2+y}{x^2+2xy+x}.\n\\]", "guidance": "Convert to M dx+N dy=0, verify exactness, integrate M in x, use F_y=N to get g'=0, then F=C.", "hintCount": 5}, "4": {"statement": "Solve, for \\(x\\ne0\\),\n\\[\nxy\\,y'=2x^2+3y^2.\n\\]", "guidance": "Use the homogeneous substitution v=y/x, y'=v+xv', separate, integrate, and recover x^2+y^2=Cx^6.", "hintCount": 4}, "5": {"statement": "Solve, for \\(x\\ne0\\),\n\\[\nxy'+2y=x^2y^3.\n\\]", "guidance": "Recognize Bernoulli with n=3; use v=y^-2; solve v'-(4/x)v=-2x with integrating factor x^-4; recover y and include y=0.", "hintCount": 4}, "6": {"statement": "Solve\n\\[\ny^3y'+xy^4=4x.\n\\]", "guidance": "Recognize Bernoulli with n=-3; v=y^4; solve v'+4xv=16x using e^(2x^2); recover real branches on intervals where the radicand is positive.", "hintCount": 4}, "7": {"statement": "Solve\n\\[\n(3x^2+2y^2)\\,dx+(4xy+6y^2)\\,dy=0.\n\\]", "guidance": "Verify exactness, integrate M in x, get g'=6y^2 and g=2y^3, then write the implicit potential equation.", "hintCount": 5}, "8": {"statement": "Solve\n\\[\n(e^x\\sin y+\\tan y)\\,dx+(e^x\\cos y+x\\sec^2y+2y)\\,dy=0.\n\\]", "guidance": "Verify exactness, integrate M in x, use F_y=N to get g'=2y, then F=C.", "hintCount": 5}, "9": {"statement": "Solve\n\\[\n(x^2+xy+y^2)\\,dx-x(x+2y)\\,dy=0.\n\\]", "guidance": "Use v=y/x; note v=±1 before division; separate with the stated partial fractions; recover (x-y)^3(x+y)=Cx^2.", "hintCount": 4}, "10": {"statement": "Solve\n\\[\ny''=2y(y')^3.\n\\]", "guidance": "Use the x-missing reduction p=y', y''=p dp/dy; treat p=0 separately; solve for p; invert to dx/dy and integrate.", "hintCount": 4}, "11": {"statement": "Solve\n\\[\ny''=(x+y')^2.\n\\]", "guidance": "Use the y-missing reduction p=y'; then v=x+p; solve v'=1+v^2; recover p and integrate.", "hintCount": 4}, "12": {"statement": "Solve\n\\[\nyy''+(y')^2=yy'.\n\\]", "guidance": "Use the x-missing reduction; derive a linear equation for p as a function of y; integrating factor y; recover p; separate and integrate to y^2=C1+C2e^x.", "hintCount": 4}};
+
+function key(p,s){return `math2650_exam1_p${p}_${s}`;}
+function saveWork(p){localStorage.setItem(key(p,'work'),document.getElementById(`work${p}`).value);}
+function revealedHints(p){let c=0;for(let h=1;h<=problems[p].hintCount;h++)if(localStorage.getItem(key(p,`hint${h}`))==='1')c++;return c;}
+function updateProgress(p){const n=revealedHints(p),t=problems[p].hintCount;document.getElementById(`progress${p}`).textContent=n===0?'No hints revealed yet.':`${n} of ${t} hints revealed.`;}
+function showHint(p,h){
+  const el=document.getElementById(`p${p}h${h}`);
+  el.style.display='block';localStorage.setItem(key(p,`hint${h}`),'1');updateProgress(p);
+  if(window.MathJax&&MathJax.typesetPromise)MathJax.typesetPromise([el]);
+}
+function resetProblem(p){
+  if(!confirm(`Reset Problem ${p}?`))return;
+  document.getElementById(`work${p}`).value='';localStorage.removeItem(key(p,'work'));
+  for(let h=1;h<=problems[p].hintCount;h++){localStorage.removeItem(key(p,`hint${h}`));document.getElementById(`p${p}h${h}`).style.display='none';}
+  document.getElementById(`prompt${p}`).style.display='none';document.getElementById(`prompt${p}`).textContent='';document.getElementById(`status${p}`).textContent='';updateProgress(p);
+}
+function buildPrompt(p){
+  saveWork(p);const work=document.getElementById(`work${p}`).value.trim();const n=revealedHints(p);
+  const prompt=`You are acting as a restrained undergraduate differential-equations review tutor.
+
+Course: MATH 2650, Exam 1 Review Session.
+
+Problem ${p}:
+${problems[p].statement}
+
+Student's current work:
+${work || "[The student has not written an attempt yet.]"}
+
+Instructor's private guidance:
+${problems[p].guidance}
+
+The student has already revealed ${n} of ${problems[p].hintCount} instructor hints.
+
+Rules:
+1. Do NOT provide a complete solution.
+2. Evaluate only the student's current work.
+3. If there is an error or unjustified step, identify only the earliest substantive mathematical issue.
+4. Give exactly ONE small hint or focused question for the next step.
+5. Follow the instructor's method and terminology; do not replace it with a different method.
+6. If the work is correct so far, say so briefly and give only one small suggestion for what to try next.
+7. Do not reveal later steps unless necessary to address the current mistake.
+8. If there is no real attempt yet, do not start solving; ask one focused question that helps identify the equation type or first step.
+9. Keep the response under 100 words.
+10. Use precise language appropriate for an undergraduate ODE course.`;
+  const el=document.getElementById(`prompt${p}`);el.textContent=prompt;el.style.display='block';document.getElementById(`status${p}`).textContent='Diagnosis prompt ready.';return prompt;
+}
+async function copyPrompt(p){
+  const el=document.getElementById(`prompt${p}`);let text=el.textContent;if(!text)text=buildPrompt(p);
+  try{await navigator.clipboard.writeText(text);document.getElementById(`status${p}`).textContent='Copied. Open ChatGPT and paste the prompt.';}
+  catch(e){el.style.display='block';document.getElementById(`status${p}`).textContent='Automatic copy was blocked. Select the prompt above and copy it manually.';}
+}
+window.addEventListener('DOMContentLoaded',()=>{
+  for(let p=1;p<=12;p++){
+    const w=localStorage.getItem(key(p,'work'));if(w)document.getElementById(`work${p}`).value=w;
+    document.getElementById(`work${p}`).addEventListener('input',()=>saveWork(p));
+    for(let h=1;h<=problems[p].hintCount;h++)if(localStorage.getItem(key(p,`hint${h}`))==='1')document.getElementById(`p${p}h${h}`).style.display='block';
+    updateProgress(p);
+  }
+});
+</script>
+</body>
+</html>
